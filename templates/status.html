@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status do Servidor Minecraft</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="status-box">
+            <form action="/status" method="post" class="form-status">
+                <input type="text" name="server_address" placeholder="Endereço do Servidor" class="input-server">
+                <button type="submit" class="btn-consultar">CONSULTAR</button>
+            </form>
+            <div class="server-info">
+                {% if status %}
+                <div class="server-response">
+                    <p>Jogadores Online: {{ status.players_online }} / {{ status.max_players }}</p>
+                    <p>Versão: {{ status.version }}</p>
+                    <p>MOTD: {{ status.motd | safe }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
